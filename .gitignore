@@ -1,9 +1,13 @@
+# db4
+db-4.8.30.NC/
+db4/
+
 *.tar.gz
 
 *.exe
 src/bitcoin
-src/bitcoind
-src/bitcoin-cli
+src/plusonecoind
+src/plusonecoin-cli
 src/bitcoin-tx
 src/test/test_bitcoin
 src/test/test_bitcoin_fuzzy
