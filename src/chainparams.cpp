@@ -19,13 +19,20 @@
 
 #include "chainparamsseeds.h"
 
+#define GENESIS_TIME 1505143065
+
+void MineGenesisBlock(CBlock &genesis);
+
 static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& scriptPubKey, uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
     CMutableTransaction txNew;
-    txNew.nVersion = 1;
+    txNew.nVersion = 2;
     txNew.vin.resize(1);
     txNew.vout.resize(1);
-    txNew.vin[0].scriptSig = CScript() << 486604799 << CScriptNum(4) << std::vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
+
+    unsigned int height = 0;
+    
+    txNew.vin[0].scriptSig = CScript() << height << std::vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
     txNew.vout[0].nValue = genesisReward;
     txNew.vout[0].scriptPubKey = scriptPubKey;
 
@@ -114,20 +121,13 @@ public:
         nDefaultPort = 22718;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1504870987, 2183033395, 0x1d7fffff, 1, 50 * COIN);
-
-	/*
-CBlock(hash=00000077c7d8e5cc7e5d39aaecc5313b63241da1d79b802ee162b10084c0d6af, ver=0x00000001, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=78459a9391a05ce6649168b8e97cef2c4cad1680408ab5293a33df1245dcf7f6, nTime=1504870987, nBits=1d7fffff, nNonce=2183033395, vtx=1)
-  CTransaction(hash=78459a9391, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-    CTxIn(COutPoint(0000000000, 4294967295), coinbase 04ffff001d01044c5a4e657720596f726b2054696d657320382f5365702f323031372045717569666178205361797320437962657261747461636b204d6179204861766520416666656374656420313433204d696c6c696f6e20437573746f6d657273)
-    CScriptWitness()
-    CTxOut(nValue=50.00000000, scriptPubKey=2103facfdfc2281652851888460835)
-	*/
+        genesis = CreateGenesisBlock(GENESIS_TIME, 2314297623, 0x1d7fffff, 1, 50 * COIN);
+	//MineGenesisBlock(genesis);
 	
 	consensus.hashGenesisBlock = genesis.GetHash();
 		
-        assert(consensus.hashGenesisBlock == uint256S("0x00000077c7d8e5cc7e5d39aaecc5313b63241da1d79b802ee162b10084c0d6af"));
-        assert(genesis.hashMerkleRoot == uint256S("0x78459a9391a05ce6649168b8e97cef2c4cad1680408ab5293a33df1245dcf7f6"));
+        assert(consensus.hashGenesisBlock == uint256S("0x0000001dcf1124502835195119d5d1c92feed10803a7f6630906e0d2d8d38b98"));
+        assert(genesis.hashMerkleRoot == uint256S("0x5a5fbc104e0a21be0a745d014a87340408ef288cc4ca6ab21fa0d7565e4f6a76"));
 
         // Note that of those with the service bits flag, most only support a subset of possible options
         vSeeds.push_back(CDNSSeedData("54.172.129.75", "54.172.129.75"));
@@ -202,30 +202,16 @@ public:
         nDefaultPort = 32718;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1504870987, 11324403, 0x1d7fffff, 1, 50 * COIN);
-
-	/*
-CBlock(hash=0000005d5fa09a12b0d852e1abcc66a29899ef1ecc6618199e19d1f1d6adde37, ver=0x00000001, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=78459a9391a05ce6649168b8e97cef2c4cad1680408ab5293a33df1245dcf7f6, nTime=1504870987, nBits=1d7fffff, nNonce=11324403, vtx=1)
-  CTransaction(hash=78459a9391, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-    CTxIn(COutPoint(0000000000, 4294967295), coinbase 04ffff001d01044c5a4e657720596f726b2054696d657320382f5365702f323031372045717569666178205361797320437962657261747461636b204d6179204861766520416666656374656420313433204d696c6c696f6e20437573746f6d657273)
-    CScriptWitness()
-    CTxOut(nValue=50.00000000, scriptPubKey=2103facfdfc2281652851888460835)
-	*/
-
+        genesis = CreateGenesisBlock(GENESIS_TIME, 43138926, 0x1d7fffff, 1, 50 * COIN);
+	//MineGenesisBlock(genesis);
+	
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x0000005d5fa09a12b0d852e1abcc66a29899ef1ecc6618199e19d1f1d6adde37"));
-        assert(genesis.hashMerkleRoot == uint256S("78459a9391a05ce6649168b8e97cef2c4cad1680408ab5293a33df1245dcf7f6"));
+        assert(consensus.hashGenesisBlock == uint256S("0x000000326aa93cced2afb89e861a0e21eda5e80fd85da59130356b473d3aaeb6"));
+        assert(genesis.hashMerkleRoot == uint256S("0x5a5fbc104e0a21be0a745d014a87340408ef288cc4ca6ab21fa0d7565e4f6a76"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
-        // nodes with support for servicebits filtering should be at the top
-	/*
-        vSeeds.push_back(CDNSSeedData("testnetbitcoin.jonasschnelli.ch", "testnet-seed.bitcoin.jonasschnelli.ch", true));
-        vSeeds.push_back(CDNSSeedData("petertodd.org", "seed.tbtc.petertodd.org", true));
-        vSeeds.push_back(CDNSSeedData("bluematt.me", "testnet-seed.bluematt.me"));
-        vSeeds.push_back(CDNSSeedData("bitcoin.schildbach.de", "testnet-seed.bitcoin.schildbach.de"));
-	*/
-	
+       
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
@@ -294,43 +280,12 @@ public:
         nDefaultPort = 42718;
         nPruneAfterHeight = 1000;
 
-	genesis = CreateGenesisBlock(1504870987, 906344014, 0x1d7fffff, 1, 50 * COIN);
-
-	/*
-	arith_uint256 best = arith_uint256();
-	int n=0;
-
-	arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
-	while (UintToArith256(genesis.GetHash()) > hashTarget) {
-
-	  arith_uint256 c=UintToArith256(genesis.GetHash());
-					 
-	  if(c < best || n==0)
-	    {
-	      best = c;
-	      n=1;
-	      printf("%s %s %s\n",genesis.GetHash().GetHex().c_str(),hashTarget.GetHex().c_str(),
-		     best.GetHex().c_str());
-	    }
-	  
-	  ++genesis.nNonce;
-	  if (genesis.nNonce == 0) { ++genesis.nTime; }
-	}
-
-	printf("%s\n",genesis.ToString().c_str());	
-	*/
-	  
-	/*
-CBlock(hash=0000001c81f193d820807987dd76508581bdf1d9ca8b574a8d03e40bc28d36bc, ver=0x00000001, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=78459a9391a05ce6649168b8e97cef2c4cad1680408ab5293a33df1245dcf7f6, nTime=1504870987, nBits=1d7fffff, nNonce=906344014, vtx=1)
-  CTransaction(hash=78459a9391, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-    CTxIn(COutPoint(0000000000, 4294967295), coinbase 04ffff001d01044c5a4e657720596f726b2054696d657320382f5365702f323031372045717569666178205361797320437962657261747461636b204d6179204861766520416666656374656420313433204d696c6c696f6e20437573746f6d657273)
-    CScriptWitness()
-    CTxOut(nValue=50.00000000, scriptPubKey=2103facfdfc2281652851888460835)
-	*/
-	
+	genesis = CreateGenesisBlock(GENESIS_TIME, 916104816, 0x1d7fffff, 1, 50 * COIN);
+	//MineGenesisBlock(genesis);
+ 
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x0000001c81f193d820807987dd76508581bdf1d9ca8b574a8d03e40bc28d36bc"));
-        assert(genesis.hashMerkleRoot == uint256S("78459a9391a05ce6649168b8e97cef2c4cad1680408ab5293a33df1245dcf7f6"));
+        assert(consensus.hashGenesisBlock == uint256S("0x0000006e3318e6a30fced3ae7b8f4bbba7725e6b53a8eefe6aa3c1e9aab9b571"));
+        assert(genesis.hashMerkleRoot == uint256S("0x5a5fbc104e0a21be0a745d014a87340408ef288cc4ca6ab21fa0d7565e4f6a76"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
@@ -396,3 +351,27 @@ void UpdateRegtestBIP9Parameters(Consensus::DeploymentPos d, int64_t nStartTime,
     regTestParams.UpdateBIP9Parameters(d, nStartTime, nTimeout);
 }
  
+void MineGenesisBlock(CBlock &genesis)
+{
+  arith_uint256 best = arith_uint256();
+  int n=0;
+  
+  arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
+  while (UintToArith256(genesis.GetHash()) > hashTarget) {
+    
+    arith_uint256 c=UintToArith256(genesis.GetHash());
+    
+    if(c < best || n==0)
+      {
+	best = c;
+	n=1;
+	printf("%s %s %s\n",genesis.GetHash().GetHex().c_str(),hashTarget.GetHex().c_str(),
+	       best.GetHex().c_str());
+      }
+    
+    ++genesis.nNonce;
+    if (genesis.nNonce == 0) { ++genesis.nTime; }
+  }
+  
+  printf("%s\n",genesis.ToString().c_str());	
+}
