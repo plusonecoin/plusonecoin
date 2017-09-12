@@ -9,10 +9,13 @@
 #include "tinyformat.h"
 #include "utilstrencodings.h"
 #include "crypto/common.h"
+#include "hmq1725/hashblock.h"
+
+extern uint256 HMQ1725Hash( const CBlockHeader *block );
 
 uint256 CBlockHeader::GetHash() const
 {
-    return SerializeHash(*this);
+  return HMQ1725(BEGIN(this->nVersion), END(this->nNonce));  
 }
 
 std::string CBlock::ToString() const

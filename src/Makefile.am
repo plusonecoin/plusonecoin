@@ -56,7 +56,7 @@ EXTRA_LIBRARIES += \
   $(LIBBITCOIN_SERVER) \
   $(LIBBITCOIN_CLI) \
   $(LIBBITCOIN_WALLET) \
-  $(LIBBITCOIN_ZMQ)
+  $(LIBBITCOIN_ZMQ) 
 
 lib_LTLIBRARIES = $(LIBBITCOINCONSENSUS)
 
@@ -289,6 +289,25 @@ libbitcoin_consensus_a_SOURCES = \
   uint256.h \
   utilstrencodings.cpp \
   utilstrencodings.h \
+  hmq1725/hashblock.h \
+  hmq1725/aes_helper.c \
+	hmq1725/bmw.c \
+	hmq1725/echo.c \
+	hmq1725/groestl.c \
+	hmq1725/keccak.c \
+	hmq1725/shabal.c \
+	hmq1725/simd.c \
+	hmq1725/whirlpool.c \
+	hmq1725/blake.c \
+	hmq1725/cubehash.c \
+	hmq1725/fugue.c \
+	hmq1725/hamsi.c \
+	hmq1725/haval.c \
+	hmq1725/jh.c \
+	hmq1725/luffa.c \
+	hmq1725/sha2big.c \
+	hmq1725/shavite.c \
+	hmq1725/skein.c \
   version.h
 
 # common: shared between bitcoind, and bitcoin-qt and non-server tools
@@ -373,7 +392,7 @@ plusonecoind_LDADD = \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
 
-plusonecoind_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
+plusonecoind_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS) 
 
 # plusonecoin binary #
 plusonecoin_cli_SOURCES = plusonecoin-cli.cpp

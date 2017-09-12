@@ -44,6 +44,14 @@ public:
 
     inline int Compare(const base_blob& other) const { return memcmp(data, other.data, sizeof(data)); }
 
+    base_blob& operator&=(const base_blob& b)
+    {
+      for (unsigned int i = 0; i < sizeof(data); i++)
+	data[i] &= b.data[i];
+      return *this;
+    }
+    
+    friend inline base_blob operator&(const base_blob& a, const base_blob& b) { return a &= b; }
     friend inline bool operator==(const base_blob& a, const base_blob& b) { return a.Compare(b) == 0; }
     friend inline bool operator!=(const base_blob& a, const base_blob& b) { return a.Compare(b) != 0; }
     friend inline bool operator<(const base_blob& a, const base_blob& b) { return a.Compare(b) < 0; }
@@ -102,6 +110,10 @@ public:
     {
         s.read((char*)data, sizeof(data));
     }
+
+    friend class uint160;
+    friend class uint256;
+    friend class uint512;
 };
 
 /** 160-bit opaque blob.
@@ -157,5 +169,55 @@ inline uint256 uint256S(const std::string& str)
     rv.SetHex(str);
     return rv;
 }
+
+typedef long long  int64;
+typedef unsigned long long  uint64;
+
+class uint512 : public base_blob<512> {
+public:
+    uint512() {}
+    uint512(const base_blob<512>& b) : base_blob<512>(b) {}
+    explicit uint512(const std::vector<unsigned char>& vch) : base_blob<512>(vch) {}
+
+    uint512& operator=(uint64 b)
+    {
+        data[0] = (unsigned int)b;
+        data[1] = (unsigned int)(b >> 32);
+        for (int i = 2; i < WIDTH; i++)
+	  {
+            data[i] = 0;
+	  }
+        return *this;
+    }
+
+    uint512(uint64 b)
+      {
+        data[0] = (unsigned int)b;
+        data[1] = (unsigned int)(b >> 32);
+        for (int i = 2; i < WIDTH; i++)
+	  data[i] = 0;
+    }
+
+    /** A cheap hash function that just returns 64 bits from the result, it can be
+     * used when the contents are considered uniformly random. It is not appropriate
+     * when the value can easily be influenced from outside as e.g. a network adversary could
+     * provide values to trigger worst-case behavior.
+     */
+    uint64_t GetCheapHash() const
+    {
+        return ReadLE64(data);
+    }
+    
+    uint256 trim256() const
+    {
+	uint256 ret;
+        for (unsigned int i = 0; i < uint256::WIDTH; i++){
+	  ret.data[i] = data[i];
+        }
+        return ret;
+    }
+};
+
+inline const uint512 operator&(const uint512& a, const uint512& b) { return uint512(a) &= b; }
 
 #endif // BITCOIN_UINT256_H
