@@ -11,7 +11,7 @@ src/plusonecoin-cli
 src/bitcoin-tx
 src/test/test_bitcoin
 src/test/test_bitcoin_fuzzy
-src/qt/test/test_bitcoin-qt
+src/qt/test/test_plusonecoin-qt
 
 # autoreconf
 Makefile.in
@@ -78,12 +78,12 @@ src/qt/test/moc*.cpp
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-bitcoin-qt
-Bitcoin-Qt.app
+plusonecoin-qt
+PlusOneCoin-Qt.app
 
 # Unit-tests
 Makefile.test
-bitcoin-qt_test
+plusonecoin-qt_test
 src/test/buildenv.py
 
 # Resources cpp
