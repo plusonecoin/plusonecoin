@@ -123,7 +123,7 @@ public:
         nPruneAfterHeight = 100000;
 
         genesis = CreateGenesisBlock(GENESIS_TIME, 2314366598, GENESIS_DIFFICULTY, 1, 50 * COIN);
-	MineGenesisBlock(genesis);
+	// MineGenesisBlock(genesis);
 	
 	consensus.hashGenesisBlock = genesis.GetHash();
 		
@@ -204,7 +204,7 @@ public:
         nPruneAfterHeight = 1000;
 
         genesis = CreateGenesisBlock(GENESIS_TIME, 43370649, GENESIS_DIFFICULTY, 1, 50 * COIN);
-	MineGenesisBlock(genesis);
+	// MineGenesisBlock(genesis);
 	
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x000067efe0b24998e5473e3c2bf24efa5e3a38b8abd16308f94f4cdbabab8a93"));
@@ -282,7 +282,7 @@ public:
         nPruneAfterHeight = 1000;
 
 	genesis = CreateGenesisBlock(GENESIS_TIME, 916372078, GENESIS_DIFFICULTY, 1, 50 * COIN);
-	MineGenesisBlock(genesis);
+	// MineGenesisBlock(genesis);
  
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x00000b8894b720fa476cf87f7a39ea2c2baa5a3d89bb236d0712c9e4c5e54d1a"));

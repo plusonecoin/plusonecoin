@@ -484,7 +484,7 @@
         <translation>Opsiynau:</translation>
     </message>
     <message>
-        <source>Bitcoin Core</source>
+        <source>PlusOneCoin Core</source>
         <translation>Craidd Bitcoin</translation>
     </message>
     <message>

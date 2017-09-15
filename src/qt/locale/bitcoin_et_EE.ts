@@ -760,8 +760,8 @@
         <translation>Valikud:</translation>
     </message>
     <message>
-        <source>Bitcoin Core</source>
-        <translation>Bitcoin Core</translation>
+        <source>PlusOneCoin Core</source>
+        <translation>PlusOneCoin Core</translation>
     </message>
     <message>
         <source>Information</source>

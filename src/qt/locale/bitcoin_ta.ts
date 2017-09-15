@@ -708,8 +708,8 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>Bitcoin Core</source>
-        <translation>Bitcoin மையம்</translation>
+        <source>PlusOneCoin Core</source>
+        <translation>PlusOneCoin மையம்</translation>
     </message>
     <message>
         <source>(default: %u)</source>
