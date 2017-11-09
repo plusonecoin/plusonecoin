@@ -19,7 +19,7 @@
 
 #include "chainparamsseeds.h"
 
-#define GENESIS_TIME 1505143065
+#define GENESIS_TIME 1510225282
 #define GENESIS_DIFFICULTY 0x1e7fffff
 
 void MineGenesisBlock(CBlock &genesis);
@@ -122,16 +122,17 @@ public:
         nDefaultPort = 22718;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(GENESIS_TIME, 2314366598, GENESIS_DIFFICULTY, 1, 50 * COIN);
-	// MineGenesisBlock(genesis);
+        genesis = CreateGenesisBlock(GENESIS_TIME, 2314582475, GENESIS_DIFFICULTY, 1, 50 * COIN);
+	//MineGenesisBlock(genesis);
 	
 	consensus.hashGenesisBlock = genesis.GetHash();
-		
-        assert(consensus.hashGenesisBlock == uint256S("0x000034310361313cc453ae20cafaf1c4a60291084cd7cf7e3236251b75efe2b6"));
+
+	assert(consensus.hashGenesisBlock == uint256S("0x00001ef7e03e773817a36c267d6f431412a3678dec49b4171f86ce419abcddea"));
         assert(genesis.hashMerkleRoot == uint256S("0x5a5fbc104e0a21be0a745d014a87340408ef288cc4ca6ab21fa0d7565e4f6a76"));
 
         // Note that of those with the service bits flag, most only support a subset of possible options
-        vSeeds.push_back(CDNSSeedData("54.172.129.75", "54.172.129.75"));
+	vSeeds.push_back(CDNSSeedData("54.172.129.75", "54.172.129.75"));
+//        vSeeds.push_back(CDNSSeedData("plusonecoin.org", "seed.plusonecoin.org"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,55);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
@@ -203,11 +204,11 @@ public:
         nDefaultPort = 32718;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(GENESIS_TIME, 43370649, GENESIS_DIFFICULTY, 1, 50 * COIN);
-	// MineGenesisBlock(genesis);
-	
+        genesis = CreateGenesisBlock(GENESIS_TIME, 43828036, GENESIS_DIFFICULTY, 1, 50 * COIN);
+	//MineGenesisBlock(genesis);
+
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x000067efe0b24998e5473e3c2bf24efa5e3a38b8abd16308f94f4cdbabab8a93"));
+        assert(consensus.hashGenesisBlock == uint256S("0x00004485c4f0ceaf9dd419be43148e7a3f4d60d6e1da5b45191e17d64849619b"));
         assert(genesis.hashMerkleRoot == uint256S("0x5a5fbc104e0a21be0a745d014a87340408ef288cc4ca6ab21fa0d7565e4f6a76"));
 
         vFixedSeeds.clear();
@@ -281,11 +282,11 @@ public:
         nDefaultPort = 42718;
         nPruneAfterHeight = 1000;
 
-	genesis = CreateGenesisBlock(GENESIS_TIME, 916372078, GENESIS_DIFFICULTY, 1, 50 * COIN);
-	// MineGenesisBlock(genesis);
+	genesis = CreateGenesisBlock(GENESIS_TIME, 916414622, GENESIS_DIFFICULTY, 1, 50 * COIN);
+	//MineGenesisBlock(genesis);
  
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x00000b8894b720fa476cf87f7a39ea2c2baa5a3d89bb236d0712c9e4c5e54d1a"));
+        assert(consensus.hashGenesisBlock == uint256S("0x000062f1ea423cf6acb44d150b46c1121f5e8705a49471e3cdb354fe53e1d85f"));
         assert(genesis.hashMerkleRoot == uint256S("0x5a5fbc104e0a21be0a745d014a87340408ef288cc4ca6ab21fa0d7565e4f6a76"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
