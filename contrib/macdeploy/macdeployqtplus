@@ -202,6 +202,7 @@ class DeploymentInfo(object):
 def getFrameworks(binaryPath, verbose):
     if verbose >= 3:
         print("Inspecting with otool: " + binaryPath)
+    
     otoolbin=os.getenv("OTOOL", "otool")
     otool = subprocess.Popen([otoolbin, "-L", binaryPath], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     o_stdout, o_stderr = otool.communicate()
@@ -210,14 +211,16 @@ def getFrameworks(binaryPath, verbose):
             sys.stderr.write(o_stderr)
             sys.stderr.flush()
             raise RuntimeError("otool failed with return code %d" % otool.returncode)
-
+        
     otoolLines = o_stdout.decode().split("\n")
+    
     otoolLines.pop(0) # First line is the inspected binary
     if ".framework" in binaryPath or binaryPath.endswith(".dylib"):
         otoolLines.pop(0) # Frameworks and dylibs list themselves as a dependency.
     
     libraries = []
     for line in otoolLines:
+        line = line.replace("\t@loader_path/libboost_system-mt.dylib","\t/usr/local/opt/boost/lib/libboost_system-mt.dylib")
         line = line.replace("@loader_path", os.path.dirname(binaryPath))
         info = FrameworkInfo.fromOtoolLibraryLine(line.strip())
         if info is not None:
@@ -331,7 +334,7 @@ def deployFrameworks(frameworks, bundlePath, binaryPath, strip, verbose, deploym
         # Get the Qt path from one of the Qt frameworks
         if deploymentInfo.qtPath is None and framework.isQtFramework():
             deploymentInfo.detectQtPath(framework.frameworkDirectory)
-        
+
         if framework.installName.startswith("@executable_path") or framework.installName.startswith(bundlePath):
             if verbose >= 2:
                 print(framework.frameworkName, "already deployed, skipping.")
