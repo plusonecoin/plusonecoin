@@ -9,7 +9,7 @@ background.tiff*
 src/bitcoin
 src/plusonecoind
 src/plusonecoin-cli
-src/bitcoin-tx
+src/plusonecoin-tx
 src/test/test_bitcoin
 src/test/test_bitcoin_fuzzy
 src/qt/test/test_plusonecoin-qt
