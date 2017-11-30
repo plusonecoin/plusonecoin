@@ -23,3 +23,4 @@ RUN make
 RUN cp src/plusonecoind /usr/bin
 RUN cp src/plusonecoin-cli /usr/bin
 RUN cp src/plusonecoin-tx /usr/bin
+RUN rm -fr /src
