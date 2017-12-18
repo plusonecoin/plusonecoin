@@ -12,6 +12,7 @@ src/plusonecoin-cli
 src/plusonecoin-tx
 src/test/test_bitcoin
 src/test/test_bitcoin_fuzzy
+src/qt/test/test_bitcoin-qt
 src/qt/test/test_plusonecoin-qt
 
 # autoreconf
