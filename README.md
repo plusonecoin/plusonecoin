@@ -6,7 +6,7 @@ https://plusonecoin.org
 What is PlusOne Coin?
 ---------------------
 
-...coming soon...
+PlusOneCoin is a social media cryptocurrency. It enables content providers and platform owners to monetize their social media sites while giving their audience more power to affect the social media content they consume.
 
 License
 -------
