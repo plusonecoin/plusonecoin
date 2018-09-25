@@ -1174,7 +1174,7 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
       {
 	return CAmount(105000 * COIN);
       }
-    
+
     CAmount nSubsidy = 50 * COIN;
     // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
     nSubsidy >>= halvings;
@@ -2885,7 +2885,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
 
     // Check transactions
     for (const auto& tx : block.vtx)
-        if (!CheckTransaction(*tx, state, false))
+        if (!CheckTransaction(*tx, state, true))
             return state.Invalid(false, state.GetRejectCode(), state.GetRejectReason(),
                                  strprintf("Transaction check failed (tx hash %s) %s", tx->GetHash().ToString(), state.GetDebugMessage()));
 
